@@ -1,569 +1,497 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Sure : fluent testing for python" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Sure by gabrielfalcao</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Sure</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Sure</h1>
+        <p class="header">fluent testing for python</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/gabrielfalcao/sure">Fork Me on GitHub</a>
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/gabrielfalcao/sure/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/gabrielfalcao/sure/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/gabrielfalcao/sure">View On GitHub</a></li>
+        </ul>
 
-          <h1 id="project_title">Sure</h1>
-          <h2 id="project_tagline">fluent testing for python</h2>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/gabrielfalcao">gabrielfalcao</a></p>
 
-          <section id="downloads">
-            <a class="zip_download_link" href="https://github.com/gabrielfalcao/sure/zipball/master">Download this project as a .zip file</a>
-            <a class="tar_download_link" href="https://github.com/gabrielfalcao/sure/tarball/master">Download this project as a tar.gz file</a>
-          </section>
-        </header>
-    </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Install</h1>
+      </header>
+      <section>
+        <h2>sure <code>1.0.4</code> - utility belt for automated testing in python (inspired by <a href="https://github.com/visionmedia/should.js/">should.js</a> )</h2>
+
+<p><a href="http://travis-ci.org/gabrielfalcao/sure"><img src="https://secure.travis-ci.org/gabrielfalcao/sure.png" alt="Build Status"></a></p>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">version</span>
+
+<span class="n">version</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'1.0.4'</span><span class="p">)</span>
+</pre></div>
+
+<h1>Installing</h1>
 
 <pre><code>user@machine:~$ [sudo] pip install sure
 </code></pre>
 
-<h1>Documentation</h1>
+<h1>Fluent assertions</h1>
 
-<h2>testing behaviour of objects</h2>
+<blockquote>
+<p>available only on cpython (no support for Jython, IronPython, PyPy, etc)</p>
+</blockquote>
 
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">that</span>
+<p>Mind-blowing easy and fluent assertions.</p>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">"something"</span><span class="p">)</span><span class="o">.</span><span class="n">is_a</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">"something"</span><span class="p">)</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s">"some"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="s">"thing"</span> <span class="ow">in</span> <span class="n">that</span><span class="p">(</span><span class="s">"something"</span><span class="p">)</span>
+<h4><code>(number).should.equal(number)</code></h4>
 
-<span class="k">class</span> <span class="nc">FooBar</span><span class="p">:</span>
-    <span class="n">attribute_one</span> <span class="o">=</span> <span class="s">"simple"</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
 
-<span class="k">assert</span> <span class="s">"attribute_one"</span> <span class="ow">in</span> <span class="n">that</span><span class="p">(</span><span class="n">FooBar</span><span class="p">)</span>
-<span class="n">vassert</span> <span class="n">that</span><span class="p">(</span><span class="n">FooBar</span><span class="p">)</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s">"attribute_one"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">FooBar</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">FooBar</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">7.5</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="mf">3.5</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">8</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
 
-<span class="c"># go faster</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">FooBar</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s">'attribute_one'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s">'simple'</span><span class="p">)</span>
+<h4>
+<code>{'a': 'collection'}.should.equal({'a': 'collection'})</code> does deep comparison</h4>
 
-<span class="c"># and also for dictionaries</span>
+<div class="highlight"><pre><span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+<span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">eql</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+<span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">must</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+</pre></div>
 
-<span class="n">name</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">john</span><span class="o">=</span><span class="s">'doe'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s">'john'</span><span class="p">)</span>
+<h4>
+<code>"A string".lower().should.equal("a string")</code> also works</h4>
 
-<span class="c"># go faster</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="s">'john'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s">'doe'</span><span class="p">)</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="s">"Awesome ASSERTIONS"</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">([</span><span class="s">'awesome'</span><span class="p">,</span> <span class="s">'assertions'</span><span class="p">])</span>
+</pre></div>
 
+<h4>
+<code>{iterable}.should.be.empty</code> applies to any iterable of length 0</h4>
 
-<h2>strings</h2>
+<div class="highlight"><pre><span class="p">[]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="p">{}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="s">""</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">that</span>
+<span class="c"># negate with:</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">"   string </span><span class="se">\n</span><span class="s"> with    lots of </span><span class="se">\n</span><span class="s"> spaces and breaklines</span><span class="se">\n\n</span><span class="s"> "</span><span class="p">)</span>
-    <span class="o">.</span><span class="n">looks_like</span><span class="p">(</span><span class="s">"string with lots of spaces and breaklines"</span><span class="p">)</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="s">"Lincoln de Sousa"</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<span class="s">"Lincoln de Sousa"</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+</pre></div>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">'foobar'</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s">'foo'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">'foobar'</span><span class="p">)</span><span class="o">.</span><span class="n">doesnt_contain</span><span class="p">(</span><span class="s">"123"</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">'foobar'</span><span class="p">)</span><span class="o">.</span><span class="n">does_not_contain</span><span class="p">(</span><span class="s">"123"</span><span class="p">)</span>
-</pre>
-</div>
+<h4>
+<code>{number}.should.be.within(0, 10)</code> asserts inclusive numeric range:</h4>
 
+<div class="highlight"><pre><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-<h2>iterable objects</h2>
+<span class="c"># negate with:</span>
 
-<h3>testing length</h3>
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
 
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">that</span>
+<h4>
+<code>{member}.should.be.within({iterable})</code> asserts that a member is part of the iterable:</h4>
 
-<span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s">'dog'</span><span class="p">,</span> <span class="s">'cat'</span><span class="p">,</span> <span class="s">'chicken'</span><span class="p">]</span>
-<span class="n">objects</span> <span class="o">=</span> <span class="p">[</span><span class="s">'television'</span><span class="p">,</span> <span class="s">'refrigerator'</span><span class="p">]</span>
-<span class="n">movies</span> <span class="o">=</span> <span class="p">[</span><span class="s">'conan'</span><span class="p">,</span> <span class="s">'matrix'</span><span class="p">,</span> <span class="s">'fight club'</span><span class="p">,</span> <span class="s">'rocky'</span><span class="p">,</span> <span class="s">'rambo'</span><span class="p">]</span>
+<div class="highlight"><pre><span class="s">"g"</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="s">"gabriel"</span><span class="p">)</span>
+<span class="s">'name'</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">({</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Gabriel'</span><span class="p">})</span>
+<span class="s">'Lincoln'</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">([</span><span class="s">'Lincoln'</span><span class="p">,</span> <span class="s">'Gabriel'</span><span class="p">])</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">([])</span><span class="o">.</span><span class="n">is_empty</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">([])</span><span class="o">.</span><span class="n">are_empty</span>
+<span class="c"># negate with:</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span><span class="o">.</span><span class="n">len_is</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span><span class="o">.</span><span class="n">len_is</span><span class="p">([</span><span class="s">'list with'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">,</span> <span class="s">'elements'</span><span class="p">])</span>
+<span class="s">'Bug'</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">([</span><span class="s">'Sure 1.0'</span><span class="p">])</span>
+<span class="s">'Bug'</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">([</span><span class="s">'Sure 1.0'</span><span class="p">])</span>
+</pre></div>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+<h4>
+<code>should.be.ok</code> and <code>shouldnt.be.ok</code>
+</h4>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+<p>Assert truthfulness:</p>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than_or_equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than_or_equals</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">movies</span><span class="p">)</span><span class="o">.</span><span class="n">len_greater_than_or_equals</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
+<span class="bp">True</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="s">'truthy tring'</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="p">{</span><span class="s">'truthy'</span><span class="p">:</span> <span class="s">'dictionary'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+</pre></div>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than_or_equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than_or_equals</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span><span class="o">.</span><span class="n">len_lower_than_or_equals</span><span class="p">(</span><span class="n">objects</span><span class="p">)</span>
-</pre>
-</div>
+<p>And negate truthfulness:</p>
 
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
 
-<h3>testing elements</h3>
+<span class="bp">False</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="s">''</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="p">{}</span><span class="o">.</span><span class="n">shouldnot</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+</pre></div>
 
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">that</span>
+<h4>Assert the length of objects with <code>{iterable}.should.have.length_of(N)</code>
+</h4>
 
-<span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="s">'mammal'</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<div class="highlight"><pre><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">mammals</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="n">Animal</span><span class="p">(</span><span class="s">'dog'</span><span class="p">),</span>
-  <span class="n">Animal</span><span class="p">(</span><span class="s">'cat'</span><span class="p">),</span>
-  <span class="n">Animal</span><span class="p">(</span><span class="s">'cat'</span><span class="p">),</span>
-  <span class="n">Animal</span><span class="p">(</span><span class="s">'cow'</span><span class="p">),</span>
-<span class="p">}</span>
+<span class="s">"Python"</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">mammals</span><span class="p">)</span><span class="o">.</span><span class="n">the_attribute</span><span class="p">(</span><span class="s">'kind'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s">'mammal'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">mammals</span><span class="p">,</span> <span class="n">within_range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">the_attribute</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="s">'cat'</span><span class="p">)</span>
-</pre>
-</div>
+<span class="p">{</span><span class="s">'john'</span><span class="p">:</span> <span class="s">'person'</span><span class="p">}</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
 
+<h4><code>callable.when.called_with(arg1, kwarg1=2).should.throw(Exception)</code></h4>
 
-<h3>deep comparisons</h3>
+<p>You can use this feature to assert that a callable raises an
+exception:</p>
 
-<p>Sure will iterate through your dictionaries, tuples and lists and compare all
-its contents, side-by-side, in depth. All you gotta do is use <code>deep_equals</code>.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="nb">range</span><span class="o">.</span><span class="n">when</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s">"20"</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="s">"range() takes no keyword arguments"</span><span class="p">)</span>
+<span class="nb">range</span><span class="o">.</span><span class="n">when</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="s">"chuck norris"</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="s">"range() integer end argument expected, got str."</span><span class="p">)</span>
+<span class="nb">range</span><span class="o">.</span><span class="n">when</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="s">"chuck norris"</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span>
+<span class="nb">range</span><span class="o">.</span><span class="n">when</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="ne">TypeError</span><span class="p">)</span>
+</pre></div>
+
+<h4><code>function.when.called_with(arg1, kwarg1=2).should.return_value(value)</code></h4>
+
+<p>This is a shorthand for testing that a callable returns the expected
+result</p>
+
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="nb">range</span><span class="o">.</span><span class="n">when</span><span class="o">.</span><span class="n">called_with</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">return_value</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+<p>this is the same as</p>
+
+<pre><code>value = range(2)
+value.should.equal([0, 1])
+</code></pre>
+
+<p>there are no differences between those 2 possibilities, use at will</p>
+
+<h4>
+<code>instance.should.be.a('typename')</code> and <code>instance.should.be.an('typename')</code>
+</h4>
+
+<p>this takes a type name and checks if the class matches that name</p>
+
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="p">{}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="s">'dict'</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">an</span><span class="p">(</span><span class="s">'int'</span><span class="p">)</span>
+
+<span class="c"># also works with paths</span>
+
+<span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="s">'collections.Iterable'</span><span class="p">)</span>
+</pre></div>
+
+<h4>
+<code>instance.should.be.a(type)</code> and <code>instance.should.be.an(type)</code>
+</h4>
+
+<p>this takes the class (type) itself and checks if the object is an instance of it</p>
+
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="s">u""</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">an</span><span class="p">(</span><span class="nb">unicode</span><span class="p">)</span>
+<span class="p">[]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">a</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+</pre></div>
+
+<h4>
+<code>instance.should.be.above(num)</code> and <code>instance.should.be.below(num)</code>
+</h4>
+
+<p>assert the instance value above and below <code>num</code></p>
+
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">above</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">above</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">below</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+</pre></div>
+
+<h1>Static assertions with <code>it</code>, <code>this</code>, <code>those</code> and <code>these</code>
+</h1>
+
+<h4>
+<code>exists()</code> and <code>should.exist()</code> asserts that the given object is truthy</h4>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">these</span><span class="p">,</span> <span class="n">those</span>
+
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+
+<span class="n">bugs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="n">bugs</span><span class="p">)</span>
+
+<span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+</pre></div>
+
+<h3>A note about the <code>assert</code> keyword</h3>
+
+<p><em>you can use or not the</em> <code>assert</code> <em>keyword, sure internally already
+raises an appropriate</em> <code>AssertionError</code> <em>with an assertion message so
+that you don't have to specify your own, but you can still use</em>
+<code>assert</code> <em>if you find it more semantic</em></p>
 
 <p>Example:</p>
 
-<div class="highlight">
-<pre><span class="n">something</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'one'</span><span class="p">:</span> <span class="s">'yeah'</span><span class="p">,</span>
-    <span class="s">'another'</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">'two'</span><span class="p">:</span> <span class="s">'cool'</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">something</span><span class="p">)</span><span class="o">.</span><span class="n">deep_equals</span><span class="p">({</span>
-    <span class="s">'one'</span><span class="p">:</span> <span class="s">'yeah'</span><span class="p">,</span>
-    <span class="s">'another'</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">'two'</span><span class="p">:</span> <span class="s">'cool'</span><span class="p">,</span>
-    <span class="p">},</span>
-<span class="p">})</span>
-</pre>
-</div>
+<span class="s">"Name"</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>
 
+<span class="c"># or you can also use</span>
 
-<p>And even better, when the comparison doesn't at some point, sure will show a <strong>VERY</strong> meaningful assertion message for you.</p>
+<span class="k">assert</span> <span class="s">"Name"</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>
 
-<h4>further</h4>
+<span class="c"># or still</span>
 
-<div class="highlight">
-<pre><span class="k">class</span> <span class="nc">animal</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">'class'</span><span class="p">:</span> <span class="s">'mammal'</span><span class="p">,</span>
-            <span class="s">'kind'</span><span class="p">:</span> <span class="n">kind</span><span class="p">,</span>
-        <span class="p">}</span>
+<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
 
-<span class="n">animals</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">animal</span><span class="p">(</span><span class="s">'dog'</span><span class="p">),</span>
-    <span class="n">animal</span><span class="p">(</span><span class="s">'cat'</span><span class="p">),</span>
-    <span class="n">animal</span><span class="p">(</span><span class="s">'cow'</span><span class="p">),</span>
-    <span class="n">animal</span><span class="p">(</span><span class="s">'cow'</span><span class="p">),</span>
-    <span class="n">animal</span><span class="p">(</span><span class="s">'cow'</span><span class="p">),</span>
-<span class="p">]</span>
+<span class="k">assert</span> <span class="n">this</span><span class="p">(</span><span class="s">"Name"</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span><span class="o">.</span><span class="n">in_each</span><span class="p">(</span><span class="s">"attributes['class']"</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="s">'mammal'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span><span class="o">.</span><span class="n">in_each</span><span class="p">(</span><span class="s">"attributes['class']"</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">([</span><span class="s">'mammal'</span><span class="p">,</span><span class="s">'mammal'</span><span class="p">,</span><span class="s">'mammal'</span><span class="p">,</span><span class="s">'mammal'</span><span class="p">,</span><span class="s">'mammal'</span><span class="p">])</span>
+<span class="c"># also without the `assert`</span>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">animals</span><span class="p">)</span><span class="o">.</span><span class="n">in_each</span><span class="p">(</span><span class="s">"attributes['kind']"</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">([</span><span class="s">'dog'</span><span class="p">,</span><span class="s">'cat'</span><span class="p">,</span><span class="s">'cow'</span><span class="p">,</span><span class="s">'cow'</span><span class="p">,</span><span class="s">'cow'</span><span class="p">])</span>
-</pre>
-</div>
+<span class="n">this</span><span class="p">(</span><span class="s">"Name"</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>
+</pre></div>
 
+<p>Any of the examples above will raise their own <code>AssertionError</code> with a
+meaningful error message.</p>
 
-<h2>contextual setup and teardown</h2>
+<h4>
+<code>dont.exists()</code>, <code>doesnt.exists()</code> and <code>shouldnt.exist()</code> asserts that the given object is falsy</h4>
 
-<div class="highlight">
-<pre><span class="kn">import</span> <span class="nn">sure</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">these</span><span class="p">,</span> <span class="n">those</span>
 
-<span class="k">def</span> <span class="nf">setup_file</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"foobar.xml"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">teardown_file</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<span class="nd">@sure.that_with_context</span><span class="p">(</span><span class="n">setup_file</span><span class="p">,</span> <span class="n">teardown_file</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">file_is_a_xml</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="s">"this file is a xml"</span>
-    <span class="n">sure</span><span class="o">.</span><span class="n">that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s">"&lt;root&gt;"</span><span class="p">)</span>
-</pre>
-</div>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<h3>you can also use lists containing callbacks for setup/teardown</h3>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<p>Like this:</p>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<div class="highlight">
-<pre><span class="k">def</span> <span class="nf">setup_file</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"foobar.xml"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">a_browser</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">httplib2</span> <span class="kn">import</span> <span class="n">Http</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">browser</span> <span class="o">=</span> <span class="n">Http</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
 
-<span class="k">def</span> <span class="nf">then_clean_file</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<h1>Synonyms</h1>
 
-<span class="k">def</span> <span class="nf">and_browser</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="k">del</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span>
+<p>Sure provides you with a lot of synonyms so that you can pick the ones
+that makes more sense for your tests.</p>
 
-<span class="nd">@sure.that_with_context</span><span class="p">([</span><span class="n">setup_file</span><span class="p">,</span> <span class="n">a_browser</span><span class="p">],</span> <span class="p">[</span><span class="n">then_clean_file</span><span class="p">,</span> <span class="n">and_browser</span><span class="p">]):</span>
-<span class="k">def</span> <span class="nf">file_equals_response</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="s">"the file equals the response"</span>
-    <span class="n">headers</span><span class="p">,</span> <span class="n">response_body</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">'<a href="http://github.com">http://github.com</a>'</span><span class="p">,</span> <span class="s">'GET'</span><span class="p">)</span>
+<p>Note that the examples below are merely illustrative, they work not
+only with numbers but with any of the assertions you read early in
+this documentation.</p>
 
-    <span class="n">file_contents</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="n">sure</span><span class="o">.</span><span class="n">that</span><span class="p">(</span><span class="n">response_body</span><span class="p">)</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">file_contents</span><span class="p">)</span>
-</pre>
-</div>
+<h2>Positive synonyms</h2>
 
+<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">must</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">does</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
 
-<p><a name="timed"></a></p>
+<h2>Negative synonyms</h2>
 
-<h2>timed tests</h2>
+<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">does_not</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doesnot</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">do_not</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
 
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="o">*</span>
+<h2>Equality synonyms</h2>
 
-<span class="nd">@within</span><span class="p">(</span><span class="n">five</span><span class="o">=</span><span class="n">seconds</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">test_sleep_for_4_seconds</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
 
-<span class="nd">@within</span><span class="p">(</span><span class="n">ten</span><span class="o">=</span><span class="n">miliseconds</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">test_sleep_for_4_miliseconds</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.004</span><span class="p">)</span>
+<h2>Existence synonyms</h2>
 
-<span class="nd">@within</span><span class="p">(</span><span class="n">ten</span><span class="o">=</span><span class="n">microseconds</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">test_sleep_for_12_microseconds</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.00012</span><span class="p">)</span>
+<div class="highlight"><pre><span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">do</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
 
-<span class="nd">@within</span><span class="p">(</span><span class="n">one</span><span class="o">=</span><span class="n">minute</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">test_sleep_for_59_seconds</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">59</span><span class="p">)</span>
+<h2>Positive boolean synonyms</h2>
 
-<span class="nd">@within</span><span class="p">(</span><span class="n">two</span><span class="o">=</span><span class="n">minutes</span><span class="p">):</span>
-<span class="k">def</span> <span class="nf">test_sleep_for_1_minute_and_59_seconds</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">time</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">119</span><span class="p">)</span>
-</pre>
-</div>
+<div class="highlight"><pre><span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">truthy</span><span class="p">;</span>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+</pre></div>
 
+<h2>Negative boolean synonyms</h2>
 
-<p>if any of the tests above take more than expected, a assertion_error is raised</p>
+<div class="highlight"><pre><span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">falsy</span><span class="p">;</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">false</span><span class="p">;</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span><span class="p">;</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
+</pre></div>
 
-<h2>exceptions</h2>
+<h1>Python compatibility</h1>
 
-<div class="highlight">
-<pre><span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="n">arg1</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">arg2</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">arg1</span> <span class="ow">and</span> <span class="n">arg2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">'yeah, it failed'</span><span class="p">)</span>
+<h2>Those are the python versions that support the assertions above <a href="http://en.wikipedia.org/wiki/CPython"><code>CPython</code></a>
+</h2>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_args</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">and_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_args</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">and_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="s">'yeah, it failed'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_args</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">and_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="s">'yeah, it failed'</span><span class="p">)</span>
+<pre><code>
+Python ~= 2.6 (CPython)
+Python ~= 2.7 (CPython)
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg1'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg1'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="s">'yeah, it failed'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg1'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="s">'yeah, it failed'</span><span class="p">)</span>
+</code></pre>
 
-<span class="c"># you can also match pieces of the string</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg1'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="s">'it failed'</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">with_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s">'arg1'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">'arg2'</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="s">'it failed'</span><span class="p">)</span>
-</pre>
-</div>
+<h2>Not supported:</h2>
 
+<pre><code>
+Jython
 
-<h3>testing if some callback should never raise an exception</h3>
+PyPy
 
-<div class="highlight">
-<pre><span class="k">def</span> <span class="nf">good_boy</span><span class="p">():</span>
-    <span class="k">pass</span>
+IronPython
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">good_boy</span><span class="p">)</span><span class="o">.</span><span class="n">does_not_raise</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">good_boy</span><span class="p">)</span><span class="o">.</span><span class="n">doesnt_raise</span><span class="p">(</span><span class="ne">Exception</span><span class="p">)</span>
-</pre>
-</div>
+UnladenSwallow
 
+StacklessPython
 
-<h2>add your own matchers</h2>
+...
+</code></pre>
 
-<div class="highlight">
-<pre><span class="nd">@that.is_a_matcher</span>
-<span class="k">def</span> <span class="nf">could_work</span><span class="p">(</span><span class="n">matcher</span><span class="p">,</span> <span class="n">parameter</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">matcher</span><span class="o">.</span><span class="n">_src</span> <span class="o">==</span> <span class="s">"this"</span>
-    <span class="k">assert</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s">"I mean, for real!"</span>
-    <span class="k">return</span> <span class="s">"cool!"</span>
+<h2>Why CPython-only ?</h2>
 
-<span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="s">"this"</span><span class="p">)</span><span class="o">.</span><span class="n">could_work</span><span class="p">(</span><span class="s">"I mean, for real!"</span><span class="p">)</span> <span class="o">==</span> <span class="s">"cool!"</span>
-</pre>
-</div>
+<p>Sure has a slick algorithm that makes use of the
+<a href="http://docs.python.org/library/ctypes">ctypes</a>, and although it is
+also available in other implementations such as
+<a href="http://www.jython.org/">Jython</a> does have the <code>ctypes</code> module, only
+the CPython provides
+<a href="http://docs.python.org/library/ctypes#loading-shared-libraries"><code>ctypes.pythonapi</code></a>,
+required by sure.</p>
 
+<h3>Holy guacamole, how did you implement that feature ?</h3>
 
-<p><a name="BDD"></a></p>
+<p>Differently of <a href="http://www.ruby-lang.org">ruby</a> python doesn't have
+<a href="http://blog.aizatto.com/2007/06/01/ruby-and-open-classes/">open classes</a>,
+but <a href="https://github.com/clarete/">Lincoln de Sousa</a> came out with a
+super <a href="https://github.com/gabrielfalcao/sure/blob/master/sure/magic.py">sick code</a> that uses the ctypes module to create a pointer to the
+<code>__dict__</code> of builtin types.</p>
 
-<h1>Hipster BDD with just... python code</h1>
+<p>Yes, it is dangerous, non-pythonic and should not be used in production code.</p>
 
-<p>Unlikely <a href="http://lettuce.it">lettuce</a>, sure allows you to describe the
-behavior you expect your application to have, very focused on
-providing a very declarative and self-describing DSL through simple
-tricks around the python syntax.</p>
+<p>Although <code>sure</code> is here to be used <strong>ONLY</strong> in test code, therefore it
+should be running in <strong>ONLY</strong> possible environments: your local
+machine or your continuous-integration server.</p>
 
-<p>This may disagree with conventions like <a href="http://www.python.org/dev/peps/pep-0008/">PEP-8</a> and Tim Peters's
-<a href="http://www.python.org/dev/peps/pep-0020/">Zen of Python</a>.</p>
+<h1>About sure 1.0</h1>
 
-<p>It's not that "sure" disagrees with those conventions, the module
-itself follows both PEP-8 and PEP-20. But it turns out that "sure"
-provides you with sometimes conflicting conventions, for the sake of
-readability and maintainability of the code that makes sure your
-production code is always healthy.</p>
+<p>The assertion library is 100% inspired be the awesomeness of
+<a href="https://github.com/visionmedia/should.js">should.js</a> which is simple,
+declarative and fluent.</p>
 
-<p>Sure aliases the decorator <code>@that_with_context</code> as <code>@scenario</code> and the
-context passed as parameter is just a bag of variables you can mess
-around without feeling like juggling with machetes. So that your
-scenario can share data in a really flexible way.</p>
+<p>Sure strives to provide everything a python developer needs in an assertion:</p>
 
-<p>*Don't worry, "sure"'s internals seal the variables you use within the
- test scope and its setup/teardown functions. Everything is sandboxed.</p>
+<ul>
+<li><p>Assertion messages are easy to understand</p></li>
+<li><p>When comparing iterables the comparation is recursive and shows
+exactly where is the error</p></li>
+<li><p>Fluency: the builtin types are changed in order to provide awesome
+simple assertions</p></li>
+</ul><h1>Old API</h1>
 
-<h2>The idea</h2>
+<p>Sure still provides to all the assertions from v0.10 up, you can <a href="https://github.com/gabrielfalcao/sure/blob/master/OLD_API.md">find the old documentation here</a></p>
 
-<p>Firstly, if you are not familiar with <a href="http://antonymarcano.com/blog/2011/03/goals-tasks-action/">Behavior-driven development</a> I strongly recommend the blog post <a href="http://dannorth.net/whats-in-a-story/">"What's in a story"</a>, by <a href="http://dannorth.net">Dan North</a>, former <a href="http://en.wikipedia.org/wiki/ThoughtWorks">ThoughtWorks</a> employee. And as you might know, ThoughtWorks <a href="http://en.wikipedia.org/wiki/ThoughtWorks#History">is internationally recognized</a> as being the cradle of agile methodologies, which often includes using assorted automated test engineering techniques.</p>
+<h2>Authors</h2>
 
-<p>Sure is pretty much just a layer you should use on top of
-<a href="http://readthedocs.org/docs/nose/en/latest/writing_tests.html#test-functions">nose-compatible test functions</a>. It
-provides you with decorators that leverage declaring scenarios and
-actions to be executed within them.</p>
+<p><a href="http://github.com/gabrielfalcao">Gabriel Falcão</a> and <a href="http://github.com/clarete">Lincoln Clarete</a></p>
 
-<p>The DSL itself is just python code, altough it requires a certain
-effort from the developers that authors the tests. In the other hand,
-it also provides builtin validation of action executions, looking for
-conflicting inter-dependency, as well as giving very meaningful
-feedback, so that you won't spend hours debugging messed up code.</p>
+<h1>License (GPLv3)</h1>
 
-<h2>Nomenclature</h2>
+<pre><code>Copyright (C) &lt;2012&gt;  Gabriel Falcão &lt;gabriel@nacaolivre.org&gt;
+Copyright (C) &lt;2012&gt;  Lincoln Clarete &lt;lincoln@comum.org&gt;
 
-<p>There are a few small examples of usage through the sub-sections
-below, don't rely solely on them, to go further on the API usage,
-check the documentation.</p>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-<h3>Scenario</h3>
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-<p>Scenarios are actually just
-<a href="http://readthedocs.org/docs/nose/en/latest/writing_tests.html#test-functions">nose-compatible test functions</a>
-decorated with <code>@scenario()</code>.</p>
-
-<p>Scenarios accepts lists of callbacks that will be called before and after
-themselves so that you have a fine grained setup/teardown management.
-Also, scenarios will call the original test functions with one
-argument: context</p>
-
-<h3>Context</h3>
-
-<p>Context is a clever object that keeps records of its contents and
-reporting ant problems when trying to access them, so that you know
-what part of your test is wrong.</p>
-
-<p>Contexts are also a key thing when calling actions, you can create
-aliases of it named: <code>Given, When, Then, And</code> and so on... You can see
-more in the examples or docs.</p>
-
-<h3>Actions</h3>
-
-<p>Are the smalllest portions of test that will compose your actions,
-declare them within any setup functions, the <code>@action_for</code> decorator
-also gives you ways to explicit what variables the action will create
-within the <code>context</code> argument, or require previous variables to be
-already in the <code>context</code>.</p>
-
-<p>This is one of the most important features of "sure", so that you and
-your team will spend less time debugging a test and more on getting
-things done.</p>
-
-<h3>Setup/Teardown</h3>
-
-<p>As said above, the <code>@scenario()</code> decorators takes 2 positional
-arguments: setup and teardown.  They can be both <code>callables</code> or <code>a
-list of callables</code>.  This is specially useful when you wanna organize
-your <code>Actions</code> into separated setup functions, then you only include
-the ones you want in each scenario.</p>
-
-<p>It may sound complicated, but during the rollout below you're gonna
-see it's easy peasy.</p>
-
-<h4>!!! IMPORTANT NOTE ON SETUP/TEARDOWN !!!</h4>
-
-<p>Never, ever name your setup and teardown functions as just <code>setup</code> and
-<code>teardown</code> respectivelly.  "Sure" has its own mechanism for calling
-them with a context variable, but if you name the callbacks as <code>setup</code>
-and/or <code>teardown</code>, then
-<a href="http://readthedocs.org/docs/nose/en/latest/writing_tests.html#fixtures">nose will call them manually</a>,
-but not only that: you will get a very bad error since the appropriate
-<code>context</code> variable will not be passed as first argument.</p>
-
-<h2>Examples</h2>
-
-<p>Let's go from a simple example and then we evolve into more features</p>
-
-<h2>The simplest case</h2>
-
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">action_for</span><span class="p">,</span> <span class="n">that</span><span class="p">,</span> <span class="n">scenario</span>
-<span class="kn">from</span> <span class="nn">myapp</span> <span class="kn">import</span> <span class="n">User</span>
-
-<span class="nd">@scenario</span>
-<span class="k">def</span> <span class="nf">users_should_introduce_themselves</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="s">"Users should eb able to introduce themselves"</span>
-
-    <span class="c"># aliasing the context for semantic usage below</span>
-    <span class="n">Given</span> <span class="o">=</span> <span class="n">Then</span> <span class="o">=</span> <span class="n">context</span>
-
-    <span class="c"># defining some actions</span>
-    <span class="nd">@action_for</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">provides</span><span class="o">=</span><span class="p">[</span><span class="s">'user'</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">there_is_a_user_called</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-        <span class="n">context</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
-
-    <span class="nd">@action_for</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s">'user'</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">he_introduces_himself_with</span><span class="p">(</span><span class="n">a_greeting</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">say_hello</span><span class="p">())</span><span class="o">.</span><span class="n">looks_like</span><span class="p">(</span><span class="n">a_greeting</span><span class="p">)</span>
-
-    <span class="c"># calling the actions</span>
-
-    <span class="n">Given</span><span class="o">.</span><span class="n">there_is_a_user_called</span><span class="p">(</span><span class="s">'Fabio'</span><span class="p">)</span>
-    <span class="n">Then</span><span class="o">.</span><span class="n">he_introduces_himself_with</span><span class="p">(</span><span class="s">'Hello, my name if Fabio. Nice meeting you'</span><span class="p">)</span>
-</pre>
-</div>
-
-
-<h2>A slightly more elaborated example: browsing with django test client + lxml</h2>
-
-<div class="highlight">
-<pre><span class="kn">from</span> <span class="nn">django.test.client</span> <span class="kn">import</span> <span class="n">Client</span>
-<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">html</span> <span class="k">as</span> <span class="n">lhtml</span>
-<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">action_for</span><span class="p">,</span> <span class="n">that</span><span class="p">,</span> <span class="n">scenario</span>
-
-<span class="k">def</span> <span class="nf">prepare_browser</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="nd">@action_in</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">provides</span><span class="o">=</span><span class="p">[</span><span class="s">'browser'</span><span class="p">,</span> <span class="s">'response'</span><span class="p">,</span> <span class="s">'dom'</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">I_navigate_to</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-       <span class="c"># preparing the browser</span>
-       <span class="n">context</span><span class="o">.</span><span class="n">browser</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
-
-       <span class="c"># saving the response</span>
-       <span class="n">context</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-
-       <span class="c"># also saving a DOM object for future traversing</span>
-       <span class="n">context</span><span class="o">.</span><span class="n">dom</span> <span class="o">=</span> <span class="n">lhtml</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-    <span class="nd">@action_in</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s">'browser'</span><span class="p">],</span> <span class="n">provides</span><span class="o">=</span><span class="p">[</span><span class="s">'title'</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">I_see_the_header_has_the_title</span><span class="p">(</span><span class="n">the_expected_title</span><span class="p">):</span>
-        <span class="c"># just saving the title for future use</span>
-        <span class="n">titles_found</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">dom</span><span class="o">.</span><span class="n">cssselect</span><span class="p">(</span><span class="s">'header .title'</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">titles_found</span><span class="p">)</span><span class="o">.</span><span class="n">len_is</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="p">)</span> <span class="o">=</span> <span class="n">titles_found</span>
-
-        <span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">looks_like</span><span class="p">(</span><span class="n">the_expected_title</span><span class="p">)</span>
-
-    <span class="nd">@action_in</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">depends_on</span><span class="o">=</span><span class="p">[</span><span class="s">'title'</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">the_title_also_has_the_classes</span><span class="p">(</span><span class="n">expected_classes</span><span class="p">):</span>
-        <span class="n">existing_classes</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'class'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">expected_class</span> <span class="ow">in</span> <span class="n">expected_classes</span><span class="p">:</span>
-            <span class="k">assert</span> <span class="n">that</span><span class="p">(</span><span class="n">existing_classes</span><span class="p">)</span><span class="o">.</span><span class="n">looks_like</span><span class="p">(</span><span class="n">expected_class</span><span class="p">)</span>
-
-
-<span class="nd">@scenario</span><span class="p">([</span><span class="n">prepare_browser</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">navigate_to_index_page</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="s">"Navigate to the index page and check some HTML markup"</span>
-    <span class="n">Given</span> <span class="o">=</span> <span class="n">Then</span> <span class="o">=</span> <span class="n">context</span>
-
-    <span class="n">Given</span><span class="o">.</span><span class="n">I_navigate_to</span><span class="p">(</span><span class="s">"/index"</span><span class="p">)</span>
-    <span class="n">When</span><span class="o">.</span><span class="n">I_see_the_header_has_the_title</span><span class="p">(</span><span class="s">"Welcome to our nifty website"</span><span class="p">)</span>
-    <span class="n">Then</span><span class="o">.</span><span class="n">the_title_also_has_the_classes</span><span class="p">([</span><span class="s">"alert"</span><span class="p">,</span> <span class="s">"alert-info"</span><span class="p">,</span> <span class="s">"fade-in"</span><span class="p">])</span>
-</pre>
-</div>
-
-
-<h1>acknowledgements</h1>
-
-<p>Thanks to the folks of <a href="http://travis-ci.org">Travis CI</a>, thanks to it
-sure's builds are running agains python 2.5, 2.6 and 2.7 so I can
-garantee it works for all those python versions.</p>
-
-<p>I love you guys</p>
-
-<h1>license</h1>
-
-<p>sure is under MIT license, so that it can be embedded into your
-project, and ran within your sandbox.</p>
-
-<pre><code>Copyright (C) &lt;2010&gt;  Gabriel Falcão &lt;gabriel@nacaolivre.org&gt;
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </code></pre>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Sure maintained by <a href="https://github.com/gabrielfalcao">gabrielfalcao</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-
-              <script type="text/javascript">
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -573,7 +501,6 @@ OTHER DEALINGS IN THE SOFTWARE.
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
