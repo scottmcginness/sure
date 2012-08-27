@@ -30,7 +30,7 @@
 
       </header>
       <section>
-        <h2>sure <code>1.0.3</code> - utility belt for automated testing in python (inspired by <a href="https://github.com/visionmedia/should.js/">should.js</a> )</h2>
+        <h2>sure <code>1.0.6</code> - utility belt for automated testing in python (inspired by <a href="https://github.com/visionmedia/should.js/">should.js</a> )</h2>
 
 <p><a href="http://travis-ci.org/gabrielfalcao/sure"><img src="https://secure.travis-ci.org/gabrielfalcao/sure.png" alt="Build Status"></a></p>
 
@@ -64,6 +64,7 @@
 <div class="highlight"><pre><span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
 <span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">eql</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
 <span class="p">{</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">}</span><span class="o">.</span><span class="n">must</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span><span class="s">'foo'</span><span class="p">:</span> <span class="s">'bar'</span><span class="p">})</span>
+
 </pre></div>
 
 <h4>
@@ -75,7 +76,8 @@
 <h4>
 <code>{iterable}.should.be.empty</code> applies to any iterable of length 0</h4>
 
-<div class="highlight"><pre><span class="p">[]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+<div class="highlight"><pre>
+<span class="p">[]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 <span class="p">{}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 <span class="nb">set</span><span class="p">()</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 <span class="s">""</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
@@ -87,6 +89,7 @@
 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 <span class="s">"Lincoln de Sousa"</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
 <span class="s">"Lincoln de Sousa"</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">empty</span><span class="p">;</span>
+
 </pre></div>
 
 <h4>
@@ -111,6 +114,23 @@
 
 <span class="s">'Bug'</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">([</span><span class="s">'Sure 1.0'</span><span class="p">])</span>
 <span class="s">'Bug'</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">within</span><span class="p">([</span><span class="s">'Sure 1.0'</span><span class="p">])</span>
+
+</pre></div>
+
+<h4>
+<code>should.be.none</code> and <code>should_not.be.none</code>
+</h4>
+
+<p>Assert whether an object is or not <code>None</code>:</p>
+
+<div class="highlight"><pre>
+<span class="n">value</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">value</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span>
+
+<span class="s">""</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span>
+
 </pre></div>
 
 <h4>
@@ -122,13 +142,14 @@
 <div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
 
 <span class="bp">True</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
-<span class="s">'truthy tring'</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="s">'truthy string'</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 <span class="p">{</span><span class="s">'truthy'</span><span class="p">:</span> <span class="s">'dictionary'</span><span class="p">}</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 </pre></div>
 
 <p>And negate truthfulness:</p>
 
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
+<div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">this</span>
 
 <span class="bp">False</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 <span class="s">''</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
@@ -138,7 +159,8 @@
 <h4>Assert the length of objects with <code>{iterable}.should.have.length_of(N)</code>
 </h4>
 
-<div class="highlight"><pre><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight"><pre>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="s">"Python"</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 
@@ -221,28 +243,53 @@ value.should.equal([0, 1])
 <h1>Static assertions with <code>it</code>, <code>this</code>, <code>those</code> and <code>these</code>
 </h1>
 
-<h4>
-<code>exists()</code> and <code>should.exist()</code> asserts that the given object is truthy</h4>
+<p>Whether you don't like the <code>object.should</code> syntax or you are simply
+not running CPython, sure still allows you to use any of the
+assertions above, all you need to do is wrap the object that is being
+compared in one of the following options: <code>it</code>, <code>this</code>, <code>those</code> and
+<code>these</code>.</p>
 
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">these</span><span class="p">,</span> <span class="n">those</span>
+<h2>Too long, don't read</h2>
 
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+<h3>All those possibilities below work just as the same</h3>
 
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">those</span><span class="p">,</span> <span class="n">these</span>
 
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+<span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">object</span><span class="p">())</span>
+<span class="n">this</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="n">bugs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="n">bugs</span><span class="p">)</span>
+<span class="n">it</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="n">users</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="n">users</span><span class="p">)</span>
+<span class="n">these</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">those</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+<h3>Also if you prefer using the <code>assert</code> keyword in your tests just go ahead an do it!</h3>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">those</span><span class="p">,</span> <span class="n">these</span>
+
+<span class="k">assert</span> <span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">this</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">it</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">these</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">those</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+<h4><code>(lambda: None).should.be.callable</code></h4>
+
+<p>Test if something is or not callable</p>
+
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sure</span>
+
+<span class="nb">range</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">callable</span>
+<span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">callable</span><span class="p">;</span>
+<span class="p">(</span><span class="mi">123</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">callable</span>
 </pre></div>
 
 <h3>A note about the <code>assert</code> keyword</h3>
@@ -271,64 +318,11 @@ that you don't have to specify your own, but you can still use</em>
 <span class="c"># also without the `assert`</span>
 
 <span class="n">this</span><span class="p">(</span><span class="s">"Name"</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>
+
 </pre></div>
 
 <p>Any of the examples above will raise their own <code>AssertionError</code> with a
 meaningful error message.</p>
-
-<h4>
-<code>dont.exists()</code>, <code>doesnt.exists()</code> and <code>shouldnt.exist()</code> asserts that the given object is falsy</h4>
-
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">these</span><span class="p">,</span> <span class="n">those</span>
-
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">these</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">those</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">({})</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">([])</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">this</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
-</pre></div>
 
 <h1>Synonyms</h1>
 
@@ -341,7 +335,8 @@ this documentation.</p>
 
 <h2>Positive synonyms</h2>
 
-<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight"><pre>
+<span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">must</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">does</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">do</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -349,7 +344,8 @@ this documentation.</p>
 
 <h2>Negative synonyms</h2>
 
-<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight"><pre>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">does_not</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -360,33 +356,28 @@ this documentation.</p>
 
 <h2>Equality synonyms</h2>
 
-<div class="highlight"><pre><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight"><pre>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">eql</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
-<h2>Existence synonyms</h2>
-
-<div class="highlight"><pre><span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">do</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">it</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">exist</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
 <h2>Positive boolean synonyms</h2>
 
-<div class="highlight"><pre><span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
-<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">truthy</span><span class="p">;</span>
-<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
+<div class="highlight"><pre>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">truthy</span>
+<span class="p">(</span><span class="ow">not</span> <span class="bp">None</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span>
 </pre></div>
 
 <h2>Negative boolean synonyms</h2>
 
-<div class="highlight"><pre><span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">falsy</span><span class="p">;</span>
-<span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">false</span><span class="p">;</span>
-<span class="bp">None</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">none</span><span class="p">;</span>
-<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
-<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
-<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span><span class="p">;</span>
-<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span><span class="p">;</span>
+<div class="highlight"><pre><span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">falsy</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">false</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span>
+<span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span>
+<span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 </pre></div>
 
 <h1>Python compatibility</h1>
