@@ -156,6 +156,53 @@
 <span class="p">{}</span><span class="o">.</span><span class="n">shouldnot</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 </pre></div>
 
+<h4>Assert existence of properties and its values</h4>
+
+<div class="highlight"><pre>
+<span class="k">class</span> <span class="nc">Basket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">]</span>
+
+
+<span class="n">basket1</span> <span class="o">=</span> <span class="n">Basket</span><span class="p">()</span>
+
+<span class="n">basket1</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s">"fruits"</span><span class="p">)</span>
+</pre></div>
+
+<h5>.have.property().being allows chaining up</h5>
+
+<p>If the programmer calls <code>have.property()</code> it returns an assertion
+builder of the property if it exists, so that you can chain up
+assertions for the property value itself.</p>
+
+<div class="highlight"><pre>
+<span class="k">class</span> <span class="nc">Basket</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">]</span>
+
+<span class="n">basket2</span> <span class="o">=</span> <span class="n">Basket</span><span class="p">()</span>
+<span class="n">basket2</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s">"fruits"</span><span class="p">)</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">equal</span><span class="p">([</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">])</span>
+<span class="n">basket2</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s">"fruits"</span><span class="p">)</span><span class="o">.</span><span class="n">with_value</span><span class="o">.</span><span class="n">equal</span><span class="p">([</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">])</span>
+<span class="n">basket2</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s">"fruits"</span><span class="p">)</span><span class="o">.</span><span class="n">with_value</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">equal</span><span class="p">([</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">])</span>
+</pre></div>
+
+<h4>Assert existence of keys and its values</h4>
+
+<div class="highlight"><pre><span class="n">basket3</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fruits</span><span class="o">=</span><span class="p">[</span><span class="s">"apple"</span><span class="p">,</span> <span class="s">"banana"</span><span class="p">])</span>
+<span class="n">basket3</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="s">"fruits"</span><span class="p">)</span>
+</pre></div>
+
+<h5>.have.key().being allows chaining up</h5>
+
+<p>If the programmer calls <code>have.key()</code> it returns an assertion
+builder of the key if it exists, so that you can chain up
+assertions for the dictionary key value itself.</p>
+
+<div class="highlight"><pre>
+<span class="n">person</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="n">person</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">none</span>
+<span class="n">person</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="s">"name"</span><span class="p">)</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+</pre></div>
+
 <h4>Assert the length of objects with <code>{iterable}.should.have.length_of(N)</code>
 </h4>
 
@@ -165,6 +212,15 @@
 <span class="s">"Python"</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 
 <span class="p">{</span><span class="s">'john'</span><span class="p">:</span> <span class="s">'person'</span><span class="p">}</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">length_of</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+<h4>Assert the magnitude of objects with <code>{X}.should.be.greater_than(Y)</code> and <code>{Y}.should.be.lower_than(X)</code>
+</h4>
+
+<div class="highlight"><pre><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">greater_than</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">lower_than</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">lower_than</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 <h4><code>callable.when.called_with(arg1, kwarg1=2).should.throw(Exception)</code></h4>
@@ -268,7 +324,7 @@ compared in one of the following options: <code>it</code>, <code>this</code>, <c
 
 <h3>Also if you prefer using the <code>assert</code> keyword in your tests just go ahead an do it!</h3>
 
-<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">those</span><span class="p">,</span> <span class="n">these</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">it</span><span class="p">,</span> <span class="n">this</span><span class="p">,</span> <span class="n">those</span><span class="p">,</span> <span class="n">these</span><span class="p">,</span> <span class="n">expect</span>
 
 <span class="k">assert</span> <span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 
@@ -279,6 +335,9 @@ compared in one of the following options: <code>it</code>, <code>this</code>, <c
 <span class="k">assert</span> <span class="n">these</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
 
 <span class="k">assert</span> <span class="n">those</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">should</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">expect</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">expect</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">not_be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 
 <h4><code>(lambda: None).should.be.callable</code></h4>
@@ -344,7 +403,8 @@ this documentation.</p>
 
 <h2>Negative synonyms</h2>
 
-<div class="highlight"><pre>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">expect</span>
+
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shouldnt</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doesnt</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -352,6 +412,25 @@ this documentation.</p>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">doesnot</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">dont</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">do_not</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">expect</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="o">.</span><span class="n">not_be</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+<h2>Chain-up synonyms</h2>
+
+<p>Any of those synonyms work as an alias to the assertion builder:</p>
+
+<ul>
+<li><code>be</code></li>
+<li><code>being</code></li>
+<li><code>to</code></li>
+<li><code>when</code></li>
+<li><code>have</code></li>
+<li><code>with_value</code></li>
+</ul><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sure</span> <span class="kn">import</span> <span class="n">expect</span>
+
+<span class="p">{</span><span class="s">"foo"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="o">.</span><span class="n">must</span><span class="o">.</span><span class="n">with_value</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">equal</span><span class="p">({</span><span class="s">"foo"</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="p">{</span><span class="s">"foo"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="o">.</span><span class="n">does</span><span class="o">.</span><span class="n">have</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span><span class="o">.</span><span class="n">being</span><span class="o">.</span><span class="n">with_value</span><span class="o">.</span><span class="n">equal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 <h2>Equality synonyms</h2>
@@ -378,6 +457,16 @@ this documentation.</p>
 <span class="bp">False</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
 <span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">true</span>
 <span class="bp">None</span><span class="o">.</span><span class="n">should_not</span><span class="o">.</span><span class="n">be</span><span class="o">.</span><span class="n">ok</span>
+</pre></div>
+
+<h1>Can I disable those the new syntax by default ?</h1>
+
+<p>Sure! <img class="emoji" title=":+1:" alt=":+1:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/+1.png?v5" height="20" width="20" align="absmiddle"></p>
+
+<p>Just export the <code>SURE_DISABLE_NEW_SYNTAX</code> environment variable before
+running your tests.</p>
+
+<div class="highlight"><pre><span class="go">export SURE_DISABLE_NEW_SYNTAX=True</span>
 </pre></div>
 
 <h1>Python compatibility</h1>
