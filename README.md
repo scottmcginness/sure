@@ -290,6 +290,72 @@ value.should.equal([0, 1])
 
 there are no differences between those 2 possibilities, use at will
 
+#### `function.should.change(var)`, `.was(value_before)` and `.now(value_after)`
+
+Assert that a function changes the value of a variable `var` (or the result of `var()` if it is callable). This compares
+the values before and after using `.equal()`, and asserts that there is a change after executing `function`.
+
+It can be used with `.when.called_with()`, so long as this is before `.change()`. Also, using `.was()` and `.now()` checks
+the value before and after the change, so long as they appear after `.change()`.
+
+```python
+# steadymark: ignore
+import sure
+
+list1, list2, list3 = [], [], []
+def appender(l=list1, v=1):
+    l.append(v)
+
+appender.should.change(list1)
+(lambda: appender(l=list2)).should.change(list2).was([])
+appender.when.called_with(l=list3, v='string').should.change(list3).was([]).now(['string'])
+```
+
+This can be useful when testing Django models, for example.
+
+```python
+# steadymark: ignore
+import sure
+from project.app.models import MyModel
+
+def model_creator():
+    MyModel().save()
+
+model_creator.should.change(MyModel.objects.count).was(0).now(1)
+```
+
+#### `function.should_not.change(var)` and `.stays(value)`
+
+Similar to `.should.change()` above, `.should_not.change()` can be used in conjuction with `.stays()`:
+
+```python
+# steadymark: ignore
+import sure
+
+def do_nothing():
+    pass
+
+a_dict = {}
+do_nothing.should_not.change(a_dict).stays({})
+```
+
+Again, this may be useful in testing changes in callables:
+
+```python
+# steadymark: ignore
+import sure
+from project.app.models import MyModel
+from project.app.forms import MyModelForm
+
+def model_creator(form):
+    if form.is_valid():
+        form.save()
+
+model_creator.when.called_with(
+    MyModelForm(required_arg=None, bad_arg=True)
+).should_not.change(MyModel.objects.count).stays(0)
+```
+
 #### `instance.should.be.a('typename')` and `instance.should.be.an('typename')`
 
 this takes a type name and checks if the class matches that name

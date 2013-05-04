@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import unicode_literals
 
+import copy
 import re
 import os
 import sys
@@ -826,12 +827,52 @@ class AssertionBuilder(object):
 
         return True
 
+    def change(self, what):
+        obj_repr = repr(self.obj)
+        assert callable(self.obj), (
+            "{0} should be callable in order to test for a .change()".format(obj_repr)
+        )
+        self.was_value = copy.deepcopy(what() if callable(what) else what)
+        self.obj(*self._callable_args, **self._callable_kw)
+        self.now_value = what() if callable(what) else what
+        if self.negative:
+            expect(self.was_value).to.be.equal(self.now_value)
+        else:
+            expect(self.was_value).to.not_be.equal(self.now_value)
+        return self
+
+    changes = change
+
+    def was(self, expected):
+        assert not self.negative and hasattr(self, 'now_value'), (
+            ".was() depends on .should.change()"
+        )
+        expect(self.was_value).to.be.equal(expected)
+        return self
+
+    def now(self, expected):
+        assert not self.negative and hasattr(self, 'now_value'), (
+            ".now() depends on .should.change()"
+        )
+        expect(self.now_value).to.be.equal(expected)
+        return self
+
+    def stays(self, expected):
+        assert self.negative and hasattr(self, 'was_value') and hasattr(self, 'now_value'), (
+            ".stays() depends on .should_not.change()"
+        )
+        expect(self.was_value).to.be.equal(expected)
+        expect(self.now_value).to.be.equal(expected)
+        return self
+
+
 this = AssertionBuilder('this')
 the = AssertionBuilder('the')
 it = AssertionBuilder('it')
 these = AssertionBuilder('these')
 those = AssertionBuilder('those')
 expect = AssertionBuilder('expect')
+doing = AssertionBuilder('doing')
 
 
 allows_new_syntax = not os.getenv('SURE_DISABLE_NEW_SYNTAX')

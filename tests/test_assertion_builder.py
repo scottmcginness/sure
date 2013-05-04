@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from __future__ import unicode_literals
 from datetime import datetime
-from sure import this, these, those, it, expect, AssertionBuilder
+from sure import this, these, those, it, expect, doing, AssertionBuilder
 from sure.six import PY3, compat_repr
 
 
@@ -28,6 +28,7 @@ def test_assertion_builder_synonyms():
     assert isinstance(this, AssertionBuilder)
     assert isinstance(these, AssertionBuilder)
     assert isinstance(those, AssertionBuilder)
+    assert isinstance(doing, AssertionBuilder)
 
 
 def test_4_equal_2p2():
@@ -559,3 +560,154 @@ def test_match_contain():
     else:
         expect(opposite_not).when.called.to.throw(
             "u'string' should NOT be in u'some string'")
+
+
+def test_change_only_applies_to_callables():
+    (u"doing(obj).should.change() only applies to callable objs")
+    def change_for_non_callable():
+        doing("non callable").should.change([])
+
+    expect(change_for_non_callable).when.called.to.throw(
+        "'non callable' should be callable in order to test for a .change()")
+
+
+def test_using_was_without_a_change():
+    def doing_was_without_a_change():
+        doing(lambda: None).should.was([])
+
+    expect(doing_was_without_a_change).when.called.to.throw(
+        ".was() depends on .should.change()")
+
+
+def test_using_now_without_a_change():
+    def doing_now_without_a_change():
+        doing(lambda: None).should.now([])
+
+    expect(doing_now_without_a_change).when.called.to.throw(
+        ".now() depends on .should.change()")
+
+
+def test_using_stays_without_a_non_change():
+    def doing_stays_without_a_non_change():
+        doing(lambda: None).should_not.stays([])
+
+    expect(doing_stays_without_a_non_change).when.called.to.throw(
+        ".stays() depends on .should_not.change()")
+
+
+def test_using_was_with_a_should_not_change():
+    def doing_was_with_a_should_not():
+        doing(lambda: None).should_not.change([]).was([])
+
+    expect(doing_was_with_a_should_not).when.called.to.throw(
+        ".was() depends on .should.change()")
+
+
+def test_using_now_with_a_should_not_change():
+    def doing_now_with_a_should_not():
+        doing(lambda: None).should_not.change([]).now([])
+
+    expect(doing_now_with_a_should_not).when.called.to.throw(
+        ".now() depends on .should.change()")
+
+
+def test_using_stays_with_a_should_change():
+    def doing_stays_with_a_should():
+        a = []
+        doing(lambda: a.append(1)).should.change(a).stays([])
+
+    expect(doing_stays_with_a_should).when.called.to.throw(
+        ".stays() depends on .should_not.change()")
+
+
+def test_changing_a_variable():
+    (u"doing(something).should.change() on a variable")
+    a = []
+    def modify_a():
+        a.append(1)
+
+    doing(modify_a).should.change(a)
+
+
+def test_changing_the_result_of_a_callable():
+    (u"doing(something).should.change() on the result of a callable")
+    a = []
+    def modify_a():
+        a.append(1)
+
+    def get_a():
+        return a
+
+    doing(modify_a).should.change(get_a)
+
+
+def test_not_changing_a_variable():
+    (u"doing(something).should_not.change() on a variable")
+    a = []
+    def do_not_modify_a():
+        return
+
+    doing(do_not_modify_a).should_not.change(a)
+
+
+def test_not_changing_the_result_of_a_callable():
+    (u"doing(something).should_not.change() on the result of a callable")
+    a = []
+    def do_not_modify_a():
+        return
+
+    def get_a():
+        return a
+
+    doing(do_not_modify_a).should_not.change(get_a)
+
+
+def test_result_before_a_change():
+    (u"doing(something).should.change().was(obj) should be original obj")
+    a = []
+    def modify_a():
+        a.append(1)
+
+    doing(modify_a).should.change(a).was([])
+
+
+def test_result_after_a_change():
+    (u"doing(something).should.change().now(obj) should be changed obj")
+    a = []
+    def modify_a():
+        a.append(1)
+
+    doing(modify_a).should.change(a).now([1])
+
+
+def test_result_before_and_after_a_change():
+    (u"doing(something).should.change().was(obj).now(obj) should do .was and .now")
+    a = []
+    def modify_a():
+        a.append(1)
+
+    doing(modify_a).should.change(a).was([]).now([1])
+
+
+def test_result_stays_after_a_non_change():
+    (u"doing(something).should_not.change().stays(obj) should be unchanged obj")
+    a = []
+    def do_not_modify_a():
+        return
+
+    doing(do_not_modify_a).should_not.change(a).stays([])
+
+
+def test_result_stays_after_a_non_change_for_immutables():
+    (u"doing(something).should_not.change().stays(obj) for immutables")
+    a = True
+    def do_not_modify_a():
+        return
+
+    doing(do_not_modify_a).should_not.change(a).stays(True)
+
+
+def test_changes_is_a_synonym_for_change():
+    changer = lambda: None
+    d = doing(changer)
+    expect(d.changes).to.be.equal(d.change)
